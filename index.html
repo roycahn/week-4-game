@@ -1,9 +1,183 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title></title>
+    <meta charset="UTF-8">
+    <title>Cristals Collector</title>
+    <!-- Added link to the jQuery Library -->
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
+<!-- Jumbotron for Title -->
+<div class="jumbotron">
+	
+    <h1 class="text-center">Crystals Collector!</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- Instructions Panel -->
+        <div class="col-lg-3">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Instructions</h2>
+                    <p> </p>
+                    
+                    
+                    <p>There are four crystals below.  By clicking on a crystal you will add a specific amount of points to your total score. </p>
+ 					<p> </p>
+                    <p>You win the game by matching your total score to a random number.  You lose the game by going over the random number.</p>
+                     <p> </p>
+                     <p>The value of each crystal is hidden from you until you click on it</p>
+                </div>
+         </div>
+        </div>
+     </div>
+     <div class="row">
+        <!--  Goal and Win Loss Panel -->
+        <div class="col-lg-3">
+   
+    	<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Number to Match</h2>
+                    <p> </p>
+                 </div>
+                 <div class="panel-body">
+                 	<h1 id="numberToMatch"> </h1>              	
+                 </div>
+        </div>
+        </div>
+        <div class="col-lg-3">
+           	<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Wins / Losses Status</h2>
+                    <p> </p>
+                 </div>
+                 <div class="panel-body">
+                 	<h1 id="wins"> </h1>
+                 	<h1 id="losses"> </h1>              	
+                 </div>
+			</div>
+       	</div>
+    </div>
+	
+	<div class="row">
+<!-- Jewels panel -->
+		<div class="col-lg-3">
+			<img id = "blue" src="assets/images/blue.jpg" class="img-thumbnail" alt="blue" width="512" height="512" >
+		</div>
+		<div class="col-lg-3">
+			<img id = "green" src="assets/images/green.jpg" class="img-thumbnail" alt="green" width="512" height="512">
+		</div>
+		<div class="col-lg-3">
+			<img  id = "purple" src="assets/images/purple.jpg" class="img-thumbnail" alt="purple" width="512" height="512">
+		</div>
+		<div class="col-lg-3">
+			<img  id = "yellow" src="assets/images/yellow.jpg" class="img-thumbnail" alt="yellow" width="512" height="512">
+		</div>
+	</div>
+ <div class="row">
+        <!-- Score Panel-->
+        <div class="col-lg-3">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Your Total Score is:</h2>
+                    <p> </p>
+                 </div>
+     				<div class="panel-body">
+                 		<h1 id="totalScore"> </h1>
+                 	</div>              	
+                </div>
+          </div>
+         </div>
+  </div>
+  <script type="text/javascript">
 
+  	var numberToMatch = 0;
+  	var wins = 0;
+  	var losses = 0;
+  	var toAdd = 0;
+  	var totalScore =0;
+  	var blue =0;
+  	var green =0;
+ 	var purple =0;
+ 	var yellow =0;
+ 	var gameOver = false;
+
+ 	numberToMatch = Math.floor(Math.random() * ((120-19)+1) + 19);
+ 	blue = Math.floor(Math.random() * ((12-1) + 1) + 1);
+	green = Math.floor(Math.random() * ((12-1) + 1) + 1);
+	purple = Math.floor(Math.random() * ((12-1) + 1) + 1);
+	yellow = Math.floor(Math.random() * ((12-1) + 1) + 1);
+
+	function	getValue(jewel) {
+		// get color and add //
+		var jewelValue = 0;
+		switch(jewel) {
+       
+       case "blue":
+       jewelValue = blue;
+       break;
+       case "green":
+       jewelValue = green;
+       break;
+       case "purple":
+       jewelValue = purple;
+       break;
+       case "yellow":
+       jewelValue = yellow;
+       break;
+       
+   }
+   return(jewelValue);
+}
+	
+
+ 	$(document).ready(function(){
+ 		numberToMatch = Math.floor(Math.random() * ((120-19)+1) + 19);
+ 		blue = Math.floor(Math.random() * ((12-1) + 1) + 1);
+		green = Math.floor(Math.random() * ((12-1) + 1) + 1);
+		purple = Math.floor(Math.random() * ((12-1) + 1) + 1);
+		yellow = Math.floor(Math.random() * ((12-1) + 1) + 1);
+
+ 		$('body').on('click', '.img-thumbnail', function() {
+ 		var jewelClicked = this.id;
+ 		
+ 		// initialize screen
+ 		$("#numberToMatch").html(numberToMatch);
+ 		$("#wins").html(wins);
+ 		$("#losses").html(losses);
+ 		$("#totalScore").html(totalScore);
+ 		
+ 			if(totalScore <= numberToMatch && gameOver === false){ 				
+ 				toAdd = getValue(jewelClicked);
+ 				totalScore =  totalScore + toAdd;
+ 				$("#totalScore").html(totalScore);
+ 			}
+ 				if(totalScore === numberToMatch && gameOver === false){
+ 					wins = wins+1;
+ 					gameOver = true;
+ 					$("#wins").html(wins);
+ 					
+ 				};
+ 			
+ 			if(totalScore > numberToMatch && gameOver === false){
+ 				losses = losses+1;
+ 				gameOver = true;
+ 				$("#losses").html(losses);
+ 				
+ 			};
+
+ 		});
+ 		gameOver = false;
+ 		totalScore =0;
+ 	});
+ 	
+
+ 	
+
+
+</script>
 </body>
 </html>
