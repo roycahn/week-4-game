@@ -18,20 +18,21 @@
 		<div class="container">
 			<div class="row">
 				<!-- Instructions Panel -->
-				<div id="instr" class="col-lg-3">
-					<div class="panel panel-default">
+				<div class="col-lg-3">
+					<div id="instr" class="panel panel-default">
 						<div  class="panel-heading">
 							<h2 class="panel-title">Instructions</h2>
 							<p> </p>
-							
-							
-							<p>There are four crystals below.  By clicking on a crystal you will add a specific amount of points to your total score. </p>
-							<p> </p>
-							<p>You win the game by matching your total score to a random number.  You lose the game by going over the random number.</p>
-							<p> </p>
-							<p>The value of each crystal is hidden from you until you click on it</p>
 						</div>
-					</div>
+							<div class="panel-body" font-size="large">
+								<p>There are four crystals below.  By clicking on a crystal you will add a specific amount of points to your total score. </p>
+								<p> </p>
+								<p>You win the game by matching your total score to a random number.  You lose the game by going over the random number.</p>
+								<p> </p>
+								<p>The value of each crystal is hidden from you until you click on it</p>
+							</div>
+						</div>
+					
 				</div>
 			</div>
 			<div class="row">
@@ -54,7 +55,7 @@
 							<h2 class="panel-title">Wins / Losses Status</h2>
 							<p> </p>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body asd">
 							<h1 id="wins"> </h1>
 							<h1 id="losses"> </h1>
 						</div>
@@ -64,16 +65,16 @@
 			
 			<div class="row">
 				<!-- Jewels panel -->
-				<div class="col-lg-3">
+				<div class="col-sm-3">
 					<img id = "blue" src="assets/images/blue.jpg" class="img-thumbnail" alt="blue" width="512" height="512" >
 				</div>
-				<div class="col-lg-3">
+				<div class="col-sm-3">
 					<img id = "green" src="assets/images/green.jpg" class="img-thumbnail" alt="green" width="512" height="512">
 				</div>
-				<div class="col-lg-3">
+				<div class="col-sm-3">
 					<img  id = "purple" src="assets/images/purple.jpg" class="img-thumbnail" alt="purple" width="512" height="512">
 				</div>
-				<div class="col-lg-3">
+				<div class="col-sm-3">
 					<img  id = "yellow" src="assets/images/yellow.jpg" class="img-thumbnail" alt="yellow" width="512" height="512">
 				</div>
 			</div>
@@ -140,8 +141,8 @@
 						}
 						// update screen
 						$("#numberToMatch").html(numberToMatch);
-						$("#wins").html(wins);
-						$("#losses").html(losses);
+						$("#wins").html("Wins: " + wins);
+						$("#losses").html("Losses: " + losses);
 						$("#totalScore").html(totalScore);
 				
 						if(totalScore <= numberToMatch && gameOver === false){
@@ -152,14 +153,14 @@
 						if(totalScore === numberToMatch && gameOver === false){
 							wins = wins+1;
 							gameOver = true;
-							$("#wins").html(wins);
+							$("#wins").html("Wins: " + wins);
 							totalScore =0;
 							}
 					
 						if(totalScore > numberToMatch && gameOver === false){
 							losses = losses+1;
 							gameOver = true;
-							$("#losses").html(losses);
+							$("#losses").html("Losses: " + losses);
 							totalScore =0;
 							}						
 					
